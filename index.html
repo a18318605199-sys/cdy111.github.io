@@ -404,7 +404,7 @@
         <section id="home-hero">
             <div class="hero-bg"><img src="hero_01.png" class="active"><img src="hero_02.png"><img src="hero_03.png"><div class="hero-overlay"></div></div>
             <div class="hero-content reveal active">
-                <h1 class="hero-title">MAKE <br><span class="gradient-text">IT NOW</span></h1>
+                <h1 class="hero-title">MAKE <br><span class="gradient-text">RIGHT NOW</span></h1>
                 <p class="hero-subtitle">The world's first autonomous clothing manufacturing ecosystem.</p>
                 <button class="btn-main" onclick="nav('design')">Explore Collection &rarr;</button>
             </div>
@@ -427,7 +427,7 @@
                     <div class="product-description">
                         <div class="info-header"><h1 style="font-size: 2.5rem; margin: 0;">Autonomous Fabricator</h1><div class="badge">FLAGSHIP</div></div>
                         <p>The Marinow One represents a paradigm shift in garment manufacturing. By condensing industrial-grade weaving, laser-cutting, and robotic stitching capabilities into a single unit, it empowers creators to move from digital concept to physical reality in hours.</p>
-                        <p>Powered by advanced intelligent algorithms, the machine automatically optimizes material usage, ensuring zero-waste production.</p>
+                        <p>Powered by advanced intelligent algorithms, the machine automatically optimizes material usage, ensuring zero-waste production while handling complex geometries that traditional manufacturing cannot achieve.</p>
                     </div>
                     <div class="spec-box">
                         <div class="price-tag">$4,999.00 <span style="font-size:1rem; color:#666">USD</span></div>
@@ -639,7 +639,7 @@
             <p>We envision a world where "mass production" is a relic of the past. A world where every garment fits perfectly, expresses individual identity, and leaves no carbon footprint. We are democratizing fashion design and manufacturing, putting the power back into the hands of creators.</p>
             <h3>Leadership</h3>
             <div class="team-grid">
-                <div class="team-member"><img src="leader.png"><h4>Dr. Elena R.</h4><p>CEO & Co-Founder</p></div>
+                <div class="team-member"><img src="leader.png"><h4>Chen Deyang</h4><p>CEO & Co-Founder</p></div>
             </div>
         </div>
     </section>
@@ -680,7 +680,6 @@
         let cartItems = [];
 
         // --- Global Search Logic ---
-        // Aggregated Data for Search
         const designs = [
             { id: 1, title: "Shadow Cloak", designer: "Marcus V", avatar: "https://randomuser.me/api/portraits/men/32.jpg", img: "img_01.png", badge: "DRM Protected" },
             { id: 2, title: "Solar Geometric", designer: "Elena K", avatar: "https://randomuser.me/api/portraits/women/44.jpg", img: "img_02.png", badge: "DRM Protected" },
@@ -707,7 +706,6 @@
             }
         }
         
-        // Handle Ctrl+K
         document.addEventListener('keydown', (e) => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
@@ -725,12 +723,11 @@
 
             if(query.length < 2) return;
 
-            // Search Designs
             const matchedDesigns = designs.filter(d => d.title.toLowerCase().includes(query) || d.designer.toLowerCase().includes(query));
             matchedDesigns.forEach(d => {
                 const html = `
                 <div class="search-result-item" onclick="toggleSearch(); openClothDetail(${d.id})">
-                    <img src="${d.img}">
+                    <img src="${d.img}" class="loaded">
                     <div>
                         <div style="color:white; font-weight:bold;">${d.title}</div>
                         <div style="color:#666; font-size:0.8rem;">Design by ${d.designer}</div>
@@ -739,7 +736,6 @@
                 resultsContainer.insertAdjacentHTML('beforeend', html);
             });
 
-            // Search Pages
             const matchedPages = searchablePages.filter(p => p.title.toLowerCase().includes(query));
             matchedPages.forEach(p => {
                 const html = `
@@ -836,24 +832,17 @@
         const cursorDot = document.getElementById("cursor-dot");
         const cursorOutline = document.getElementById("cursor-outline");
 
-        if(window.innerWidth > 768) { // Only active on desktop
+        if(window.innerWidth > 768) { 
             window.addEventListener("mousemove", function(e) {
                 const posX = e.clientX;
                 const posY = e.clientY;
-                
-                // Dot follows instantly
                 cursorDot.style.left = `${posX}px`;
                 cursorDot.style.top = `${posY}px`;
-                
-                // Outline follows with delay (simple css transition handles smooth movement if we update position)
-                // To make it super smooth JS animation is better, but CSS transition on left/top is easier for now
                 cursorOutline.animate({
                     left: `${posX}px`,
                     top: `${posY}px`
                 }, { duration: 500, fill: "forwards" });
             });
-
-            // Hover effects
             document.querySelectorAll('a, button, .design-card, .grid-item, .material-card, .color-circle').forEach(el => {
                 el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
                 el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
@@ -863,20 +852,15 @@
         // --- Workbench Tilt Logic ---
         const wbContainer = document.querySelector('.workbench-ui');
         const tiltContent = document.querySelector('.preview-content');
-        
         if(wbContainer && tiltContent && window.innerWidth > 768) {
             wbContainer.addEventListener('mousemove', (e) => {
                 const rect = wbContainer.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
-                // Calculate rotation (max 5 deg)
-                const xRot = ((y / rect.height) - 0.5) * -10; // Up/Down
-                const yRot = ((x / rect.width) - 0.5) * 10;   // Left/Right
-                
+                const xRot = ((y / rect.height) - 0.5) * -10;
+                const yRot = ((x / rect.width) - 0.5) * 10;
                 tiltContent.style.transform = `rotateX(${xRot}deg) rotateY(${yRot}deg)`;
             });
-            
             wbContainer.addEventListener('mouseleave', () => {
                 tiltContent.style.transform = `rotateX(0deg) rotateY(0deg)`;
             });
@@ -929,7 +913,6 @@
             }
             cartItems.forEach((item, index) => {
                 subtotal += item.price;
-                // Add class="loaded" directly to img tag in cart
                 const html = `<div class="cart-item"><img src="${item.img}" class="loaded"><div class="cart-item-info"><div class="cart-item-title">${item.title}</div><div class="cart-item-type">${item.type}</div></div><div class="cart-item-price">$${item.price.toFixed(2)}</div><div class="remove-btn" onclick="removeFromCart(${index})">Remove</div></div>`;
                 container.insertAdjacentHTML('beforeend', html);
             });
@@ -962,23 +945,18 @@
         function openDesigner(name) { 
             const designerInfo = designs.find(d => d.designer === name);
             if(!designerInfo) return;
-
             document.getElementById('designer-profile-name').innerText = designerInfo.designer; 
             document.getElementById('designer-profile-pic').src = designerInfo.avatar; 
-            
-            // Render portfolio with clickable images and onload
             const grid = document.getElementById('designer-portfolio-grid');
             grid.innerHTML = '';
             const works = designs.filter(d => d.designer === name);
             works.forEach(d => {
-                // IMPORTANT: Added onclick event and onload
                 const html = `<div class="design-card" onclick="openClothDetail(${d.id})">
                     <img src="${d.img}" class="dc-image" onload="this.classList.add('loaded')">
                     <div class="dc-info"><strong>${d.title}</strong></div>
                 </div>`;
                 grid.insertAdjacentHTML('beforeend', html);
             });
-
             nav('designer-detail'); 
         }
 
