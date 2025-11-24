@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AETHER | 未来服装制造生态</title>
+    <title>MARINOW | 未来服装制造生态</title>
     <style>
         /* --- 核心变量与重置 --- */
         :root {
@@ -56,24 +56,20 @@
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
+        /* Logo 容器 */
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 1.3rem;
-            letter-spacing: 1.5px;
-            color: white;
+            height: 100%;
             cursor: pointer;
+            padding: 10px 0;
         }
 
-        .logo-icon {
-            width: 32px; height: 32px;
-            background: var(--accent-gradient);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px; color: white;
-            box-shadow: 0 0 15px rgba(123, 97, 255, 0.4);
+        /* 图片 Logo 样式 (调整高度以适应长文字图片) */
+        .logo-img {
+            height: 30px; /* 稍微调小一点高度，让长文字看起来更精致 */
+            width: auto;
+            object-fit: contain;
         }
 
         .nav-group {
@@ -345,7 +341,7 @@
         }
         .dot.active { background: white; transform: scale(1.2); }
 
-        /* --- 新增：产品详情板块 (Detail Sections) --- */
+        /* --- 产品详情板块 --- */
         .detail-section {
             margin-top: 120px;
             padding: 60px 0;
@@ -530,26 +526,26 @@
     <!-- 导航栏 -->
     <header>
         <div class="logo" onclick="nav('home')">
-            <div class="logo-icon">A</div>
-            <span>AETHER</span>
+            <!-- 替换为新 Logo 图片 -->
+            <img src="logo_header.png" alt="MARINOW" class="logo-img">
         </div>
         <div class="nav-group">
-            <!-- Product Link (Icon: Cube) -->
+            <!-- Product Link -->
             <button class="nav-btn" onclick="nav('product')">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                 Product
             </button>
-            <!-- Design Link (Icon: T-Shirt) -->
+            <!-- Design Link -->
             <button class="nav-btn" onclick="nav('design')">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
                 Design
             </button>
-            <!-- Workbench Link (Icon: Sliders) -->
+            <!-- Workbench Link -->
             <button class="nav-btn" onclick="nav('workbench')">
                 <svg class="icon" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
                 Workbench
             </button>
-            <!-- Community Link (Icon: Users) -->
+            <!-- Community Link -->
             <button class="nav-btn" onclick="nav('community')">
                 <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 Community
@@ -575,16 +571,16 @@
         </section>
 
         <section class="home-grid">
-            <!-- 1. Product (Cube Icon) -->
+            <!-- 1. Product -->
             <div class="grid-item" onclick="nav('product')">
                 <div class="grid-icon">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                 </div>
                 <div class="grid-title">Product</div>
-                <div class="grid-desc">Aether One: All-in-one Factory</div>
+                <div class="grid-desc">Marinow One: All-in-one Factory</div>
             </div>
             
-            <!-- 2. Design (T-Shirt Icon) -->
+            <!-- 2. Design -->
             <div class="grid-item" onclick="nav('design')">
                 <div class="grid-icon">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
@@ -593,7 +589,7 @@
                 <div class="grid-desc">Original works & Copyrights</div>
             </div>
             
-            <!-- 3. Workbench (Sliders Icon) -->
+            <!-- 3. Workbench -->
             <div class="grid-item" onclick="nav('workbench')">
                 <div class="grid-icon">
                     <svg class="icon" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
@@ -602,7 +598,7 @@
                 <div class="grid-desc">Create & Customize</div>
             </div>
             
-            <!-- 4. Community (Users Icon) -->
+            <!-- 4. Community -->
             <div class="grid-item" onclick="nav('community')">
                 <div class="grid-icon">
                     <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -617,7 +613,7 @@
     <section id="product" class="page-section hidden">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Aether One</h2>
+                <h2 class="section-title">Marinow One</h2>
                 <button class="btn-back" onclick="nav('home')">← Back Home</button>
             </div>
             
@@ -640,7 +636,7 @@
                             <h1 style="font-size: 2.5rem; margin: 0;">Autonomous Fabricator</h1>
                             <div class="badge">FLAGSHIP</div>
                         </div>
-                        <p>The Aether One represents a paradigm shift in garment manufacturing. By condensing industrial-grade weaving, laser-cutting, and robotic stitching capabilities into a single unit, it empowers creators to move from digital concept to physical reality in hours.</p>
+                        <p>The Marinow One represents a paradigm shift in garment manufacturing. By condensing industrial-grade weaving, laser-cutting, and robotic stitching capabilities into a single unit, it empowers creators to move from digital concept to physical reality in hours.</p>
                         <p>Powered by advanced intelligent algorithms, the machine automatically optimizes material usage, ensuring zero-waste production while handling complex geometries that traditional manufacturing cannot achieve.</p>
                     </div>
 
@@ -657,12 +653,12 @@
                 </div>
             </div>
 
-            <!-- 产品详情 - 模块化展示 (修改了文字) -->
+            <!-- 产品详情 - 模块化展示 -->
             <div class="detail-section">
                 <div class="detail-grid-split">
                     <div class="detail-text">
                         <h3>Modular Toolheads</h3>
-                        <p>Versatility is key. The magnetic quick-swap toolhead system allows for seamless transitions between additive manufacturing, subtractive cutting, and intricate embroidery. No tools required.</p>
+                        <p>Versatility is key. The magnetic quick-swap toolhead system allows for seamless transitions between cutting, finishing, and stitching. No tools required.</p>
                         <ul style="margin-top: 20px; color: #888; list-style: disc; padding-left: 20px;">
                             <li><strong>Laser Cutter:</strong> For precision fabric cutting & engraving</li>
                             <li><strong>Smart Iron:</strong> For automated seam pressing & finishing</li>
@@ -679,7 +675,7 @@
             <div class="detail-section detail-full-width">
                 <div style="max-width: 800px; margin: 0 auto;">
                     <h3 style="font-size: 2.5rem; margin-bottom: 10px; background: linear-gradient(90deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Precision Engineering</h3>
-                    <p style="color:#999; font-size: 1.1rem;">Every component is meticulously designed for stability and speed. From the rigid aluminum gantry to the silent stepper drivers, Aether One is built to last.</p>
+                    <p style="color:#999; font-size: 1.1rem;">Every component is meticulously designed for stability and speed. From the rigid aluminum gantry to the silent stepper drivers, Marinow One is built to last.</p>
                 </div>
                 <img src="prod_detail_01.png" class="detail-full-img" alt="Exploded View">
             </div>
@@ -787,7 +783,7 @@
                     <div class="badge">DIGITAL PATTERN</div>
                     <h1 id="detail-title-target" style="font-size: 2.5rem; margin-top: 10px;">Title</h1>
                     <p style="color: #888; margin-top: 20px;">
-                        This digital asset includes the full 3D schematic, material bill, and Aether One sewing instructions.
+                        This digital asset includes the full 3D schematic, material bill, and Marinow One sewing instructions.
                         Features advanced deconstructed tailoring and raw-edge finishing.
                         Protected by blockchain copyright verification.
                     </p>
@@ -891,7 +887,7 @@
                     </div>
                     <button class="btn-buy" style="margin-top: 10px;" onclick="startFabrication()">Start Fabrication</button>
                     <div class="progress-wrapper" id="prog-wrap">
-                        <div class="status-text" id="prog-text">Initializing Aether One...</div>
+                        <div class="status-text" id="prog-text">Initializing Marinow One...</div>
                         <div class="progress-track">
                             <div class="progress-bar" id="prog-bar"></div>
                         </div>
@@ -913,9 +909,9 @@
                 <!-- Post 1 -->
                 <div class="feed-post">
                     <div class="post-header">
-                        <div class="avatar" style="background: #ff6b6b; display: flex; align-items: center; justify-content: center; font-weight: bold;">A</div>
+                        <div class="avatar" style="background: #ff6b6b; display: flex; align-items: center; justify-content: center; font-weight: bold;">M</div>
                         <div>
-                            <strong>Aether_Official</strong>
+                            <strong>Marinow_Official</strong>
                             <span class="user-tag tag-admin">Admin</span>
                         </div>
                         <span style="margin-left: auto; color: #555; font-size: 0.8rem;">10 mins ago</span>
@@ -955,7 +951,7 @@
                         </div>
                         <span style="margin-left: auto; color: #555; font-size: 0.8rem;">2h ago</span>
                     </div>
-                    <p>Just finished printing the Solar Geometric set. The texture rendering on the Aether One is insane! #DIYFashion #FutureWear</p>
+                    <p>Just finished printing the Solar Geometric set. The texture rendering on the Marinow One is insane! #DIYFashion #FutureWear</p>
                     <div class="post-actions">
                         <span class="post-action-item">❤️ 89</span>
                         <span class="post-action-item">💬 7</span>
@@ -972,7 +968,7 @@
                         </div>
                         <span style="margin-left: auto; color: #555; font-size: 0.8rem;">5h ago</span>
                     </div>
-                    <p>New shipment of Smart-Conductive Thread is now compatible with Aether One firmware v4.5. Perfect for creating heated jackets or LED-integrated designs.</p>
+                    <p>New shipment of Smart-Conductive Thread is now compatible with Marinow One firmware v4.5. Perfect for creating heated jackets or LED-integrated designs.</p>
                     <div class="post-actions">
                         <span class="post-action-item">❤️ 230</span>
                         <span class="post-action-item">💬 45</span>
