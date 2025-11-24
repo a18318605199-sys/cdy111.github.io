@@ -929,8 +929,7 @@
             }
             cartItems.forEach((item, index) => {
                 subtotal += item.price;
-                // Add class="loaded" directly to img tag in cart
-                const html = `<div class="cart-item"><img src="${item.img}" class="loaded"><div class="cart-item-info"><div class="cart-item-title">${item.title}</div><div class="cart-item-type">${item.type}</div></div><div class="cart-item-price">$${item.price.toFixed(2)}</div><div class="remove-btn" onclick="removeFromCart(${index})">Remove</div></div>`;
+                const html = `<div class="cart-item"><img src="${item.img}"><div class="cart-item-info"><div class="cart-item-title">${item.title}</div><div class="cart-item-type">${item.type}</div></div><div class="cart-item-price">$${item.price.toFixed(2)}</div><div class="remove-btn" onclick="removeFromCart(${index})">Remove</div></div>`;
                 container.insertAdjacentHTML('beforeend', html);
             });
             const tax = subtotal * 0.08;
@@ -966,12 +965,11 @@
             document.getElementById('designer-profile-name').innerText = designerInfo.designer; 
             document.getElementById('designer-profile-pic').src = designerInfo.avatar; 
             
-            // Render portfolio with clickable images and onload
             const grid = document.getElementById('designer-portfolio-grid');
             grid.innerHTML = '';
             const works = designs.filter(d => d.designer === name);
             works.forEach(d => {
-                // IMPORTANT: Added onclick event and onload
+                // IMPORTANT: Added onclick event to open cloth detail, and onload event to fix visibility
                 const html = `<div class="design-card" onclick="openClothDetail(${d.id})">
                     <img src="${d.img}" class="dc-image" onload="this.classList.add('loaded')">
                     <div class="dc-info"><strong>${d.title}</strong></div>
