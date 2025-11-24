@@ -929,75 +929,10 @@
             }
             cartItems.forEach((item, index) => {
                 subtotal += item.price;
-                const html = `<div class="cart-item"><img src="${item.img}"><div class="cart-item-info"><div class="cart-item-title">${item.title}</div><div class="cart-item-type">${item.type}</div></div><div class="cart-item-price">$${item.price.toFixed(2)}</div><div class="remove-btn" onclick="removeFromCart(${index})">Remove</div></div>`;
+                // Add class="loaded" directly to img tag in cart
+                const html = `<div class="cart-item"><img src="${item.img}" class="loaded"><div class="cart-item-info"><div class="cart-item-title">${item.title}</div><div class="cart-item-type">${item.type}</div></div><div class="cart-item-price">$${item.price.toFixed(2)}</div><div class="remove-btn" onclick="removeFromCart(${index})">Remove</div></div>`;
                 container.insertAdjacentHTML('beforeend', html);
             });
             const tax = subtotal * 0.08;
             const total = subtotal + tax;
-            document.getElementById('cart-subtotal').innerText = "$" + subtotal.toFixed(2);
-            document.getElementById('cart-tax').innerText = "$" + tax.toFixed(2);
-            document.getElementById('cart-total').innerText = "$" + total.toFixed(2);
-        }
-        function showToast(message) { const container = document.getElementById('toast-container'); const toast = document.createElement('div'); toast.className = 'toast'; toast.innerHTML = `<span>✓</span> ${message}`; container.appendChild(toast); setTimeout(() => toast.classList.add('show'), 10); setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000); }
-        
-        const heroImages = document.querySelectorAll('.hero-bg img'); let currentHeroIndex = 0; 
-        setInterval(() => { if(heroImages.length > 0) { heroImages[currentHeroIndex].classList.remove('active'); currentHeroIndex = (currentHeroIndex + 1) % heroImages.length; heroImages[currentHeroIndex].classList.add('active'); } }, 4000);
-        
-        const productImages = ['prod_01.png', 'prod_02.png', 'prod_03.png']; let currentProdIndex = 0; 
-        function switchProduct(direction) { const imgEl = document.getElementById('product-display-img'); const dots = document.querySelectorAll('.dot'); imgEl.style.opacity = 0; setTimeout(() => { currentProdIndex += direction; if(currentProdIndex >= productImages.length) currentProdIndex = 0; if(currentProdIndex < 0) currentProdIndex = productImages.length - 1; imgEl.src = productImages[currentProdIndex]; dots.forEach(d => d.classList.remove('active')); document.getElementById(`dot-${currentProdIndex}`).classList.add('active'); imgEl.onload = () => { imgEl.style.opacity = 1; } }, 200); }
-        
-        let touchStartX = 0; const sliderContainer = document.getElementById('product-slider-container'); if(sliderContainer) { sliderContainer.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX); sliderContainer.addEventListener('touchend', e => { if (e.changedTouches[0].screenX < touchStartX - 50) switchProduct(1); if (e.changedTouches[0].screenX > touchStartX + 50) switchProduct(-1); }); }
-        
-        function openClothDetail(designId) { 
-            const design = designs.find(d => d.id === designId);
-            if(!design) return;
-            currentItemName = design.title; currentDesigner = design.designer; 
-            document.getElementById('detail-title-target').innerText = design.title; 
-            document.getElementById('detail-designer-target').innerText = design.designer; 
-            document.getElementById('detail-img-target').src = design.img; 
-            nav('clothing-detail'); 
-        }
-        
-        function openDesigner(name) { 
-            const designerInfo = designs.find(d => d.designer === name);
-            if(!designerInfo) return;
-
-            document.getElementById('designer-profile-name').innerText = designerInfo.designer; 
-            document.getElementById('designer-profile-pic').src = designerInfo.avatar; 
-            
-            const grid = document.getElementById('designer-portfolio-grid');
-            grid.innerHTML = '';
-            const works = designs.filter(d => d.designer === name);
-            works.forEach(d => {
-                // IMPORTANT: Added onclick event to open cloth detail, and onload event to fix visibility
-                const html = `<div class="design-card" onclick="openClothDetail(${d.id})">
-                    <img src="${d.img}" class="dc-image" onload="this.classList.add('loaded')">
-                    <div class="dc-info"><strong>${d.title}</strong></div>
-                </div>`;
-                grid.insertAdjacentHTML('beforeend', html);
-            });
-
-            nav('designer-detail'); 
-        }
-
-        function navToWorkbenchWithItem() { document.getElementById('wb-project-name').innerText = currentItemName; document.getElementById('wb-project-name').style.color = "#fff"; nav('workbench'); }
-        function selectMat(el, imgFile) { document.querySelectorAll('.material-card').forEach(d => d.classList.remove('selected')); el.classList.add('selected'); const previewOverlay = document.getElementById('preview-texture'); if(imgFile) { previewOverlay.style.backgroundImage = `url(${imgFile})`; previewOverlay.style.display = 'block'; } }
-        function selectColor(el, colorCode) { document.querySelectorAll('.color-circle').forEach(d => d.classList.remove('selected')); el.classList.add('selected'); const colorOverlay = document.getElementById('preview-color'); if(colorCode === 'transparent') { colorOverlay.style.backgroundColor = 'transparent'; colorOverlay.style.opacity = 0; } else { colorOverlay.style.backgroundColor = colorCode; colorOverlay.style.opacity = 0.6; } }
-        function startFabrication() { if(document.getElementById('wb-project-name').innerText === "Empty Project") { showToast("Please select a design first"); return; } const wrap = document.getElementById('prog-wrap'); const bar = document.getElementById('prog-bar'); const text = document.getElementById('prog-text'); const icon = document.getElementById('wb-preview-icon'); wrap.style.display = 'block'; icon.classList.add('working'); let width = 0; const statusMessages = ["Initializing Marinow One...", "Loading G-code...", "Heating Extruder to 210°C...", "Calibrating Laser Cutter...", "Weaving Base Layer (Cotton)...", "Applying Bio-Silk Texture...", "Stitching Seams...", "Finalizing Details...", "Cooling Down..."]; const timer = setInterval(() => { if (width >= 100) { clearInterval(timer); text.innerText = "Fabrication Complete. Ready for pickup."; text.style.color = "#4caf50"; icon.classList.remove('working'); showToast("Fabrication Complete!"); } else { width++; bar.style.width = width + '%'; const msgIndex = Math.floor((width / 100) * statusMessages.length); if(statusMessages[msgIndex]) text.innerText = statusMessages[msgIndex]; } }, 80); }
-        
-        // Back to Top Logic
-        const backToTopBtn = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
+            docum
